@@ -3,8 +3,19 @@ import Back from '/static/img/back-img.svg';
 import City from '/static/img/city.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
 import { Helmet } from 'react-helmet';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const LocalPharmacy = () => {
+    const dispatch = useAppDispatch();
+
+    const handleBack =()=>{
+      dispatch(setSubformStage({createProfile : 3}))
+    }
+
+    const handleNext =()=>{
+        dispatch(setSubformStage({createProfile : 5}))
+    }
     return (
         <React.Fragment>
             <Helmet>
@@ -12,7 +23,7 @@ const LocalPharmacy = () => {
             </Helmet>
             <div className='title-container'>
                 <div className="text-center cursor-pointer pt-56">
-                    <img src={Back} className="mb-8" alt="back arrow" />
+                    <img src={Back} onClick={handleBack} className="mb-8" alt="back arrow" />
                 </div>
                 <h2 className="text-center main-h mb-32">Local Pharmacy Info</h2>
             </div>
@@ -90,7 +101,7 @@ const LocalPharmacy = () => {
                         </label>
                     </div>
                     <button
-                        
+                        onClick={handleNext}
                         className='btn btn-primary form-btn w-100 '
                     >
                         Next

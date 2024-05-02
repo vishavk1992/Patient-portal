@@ -1,12 +1,33 @@
+// import { useAppSelector } from '../../../store/hooks';
+// import CreateProfile from '../../forms/createProfile';
 
-import EmergencyContact from '../../forms/createProfile/emergency-contact'
+
+import AnxietyTest from "../../forms/mhe/anxiety-test"
+
+
 
 const OnBoardingForm = () => {
-  return (
-    <div className='main-wrapper '>
-     <div className='page-scroll w-100'>
+ 
+  // const formStage = useAppSelector((state)=>state.form.formStage)
 
-      <EmergencyContact />
+
+  return (
+    <div className="main-wrapper">
+      <div className={"w-100 page-scroll"
+      }>
+
+        {/* {(() => {
+          switch (formStage) {
+            case 1:
+              return <CreateProfile />
+           
+           
+            default:
+              return null;
+
+          }
+        })()} */}
+        <AnxietyTest/>
       </div>
 
     </div>

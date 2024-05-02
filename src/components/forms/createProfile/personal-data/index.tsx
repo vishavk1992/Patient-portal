@@ -3,11 +3,19 @@ import backImg from "/static/img/back-img.svg";
 import City from '/static/img/city.svg';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 import React from 'react';
 
 
 const PersonalData = () => {
   const navigate = useNavigate();
+  const dispatch  = useAppDispatch();
+  
+  const handleNext = () =>{
+    dispatch(setSubformStage({createProfile: 2}))
+  }
+
   return (
    
     <React.Fragment>
@@ -70,6 +78,7 @@ const PersonalData = () => {
             </div>
           </div>
           <button
+           onClick={handleNext}
             className='btn btn-primary form-btn btn-w-fit btn-with-border w-100'
           >
             Next

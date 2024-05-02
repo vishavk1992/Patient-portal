@@ -2,10 +2,20 @@ import React from 'react'
 import { Helmet } from 'react-helmet';
 import backImg from "/static/img/back-img.svg";
 import cityImg from "/static/img/city.svg"
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const MailingAddress = () => {
-    const navigate = useNavigate();
+    const dispatch  = useAppDispatch();
+
+    const handleBack=()=>{
+      dispatch(setSubformStage({createProfile : 1}))
+    }
+
+    const handleNext = ()=>{
+        dispatch(setSubformStage({createProfile : 3}))
+    }
+
     return (
         <React.Fragment>
             <Helmet>
@@ -13,7 +23,7 @@ const MailingAddress = () => {
             </Helmet>
             <div className='title-container'>
                 <div className="text-center cursor-pointer pt-56">
-                    <img src={backImg} className="mb-8" onClick={() => navigate('/')} alt="back arrow" />
+                    <img src={backImg} className="mb-8" onClick={handleBack} alt="back arrow" />
                 </div>
                 <h2 className="text-center main-h mb-32">Mailing Address</h2>
             </div>
@@ -67,6 +77,7 @@ const MailingAddress = () => {
                         </div>
                     </div>
                     <button
+                    onClick={handleNext}
                         className='btn btn-primary form-btn w-100'
                     >
                         Next

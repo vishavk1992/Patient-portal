@@ -2,8 +2,21 @@ import React from 'react'
 import Back from '/static/img/back-img.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
 import { Helmet } from 'react-helmet';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const EmergencyContact = () => {
+
+    const dispatch = useAppDispatch();
+
+    const handleBack=()=>{
+        dispatch(setSubformStage({createProfile : 4}))
+    }
+    const handleNext=()=>{
+        dispatch(setSubformStage({createProfile : 6}))
+    }
+
+
     return (
         <React.Fragment>
             <Helmet>
@@ -11,7 +24,7 @@ const EmergencyContact = () => {
             </Helmet>
             <div className='title-container'>
                 <div className='text-center cursor-pointer pt-56'>
-                    <img src={Back} className='mb-8' />
+                    <img src={Back} onClick={handleBack} className='mb-8' />
                 </div>
 
                 <h2 className='main-h text-center mb-32'>
@@ -89,6 +102,7 @@ const EmergencyContact = () => {
                         </div>
                     </div>
                     <button
+                    onClick={handleNext}
                         className='btn btn-primary form-btn btn-w-fit w-100'
                     >
                         Next

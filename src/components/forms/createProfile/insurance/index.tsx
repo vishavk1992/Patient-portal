@@ -1,10 +1,19 @@
 import React from 'react'
 import { Helmet } from 'react-helmet';
 import backImg from "/static/img/back-img.svg";
-import { useNavigate } from 'react-router-dom';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
+import { useAppDispatch } from '../../../../store/hooks';
 
 const Insurance = () => {
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    
+    const handleBack=()=>{
+        dispatch(setSubformStage({createProfile : 2}))
+    }
+    const handleNext=()=>{
+        dispatch(setSubformStage({createProfile : 4}))
+    }
+
 
     return (
         <React.Fragment>
@@ -13,7 +22,7 @@ const Insurance = () => {
             </Helmet>
             <div className='title-container'>
                 <div className="text-center cursor-pointer pt-56">
-                    <img src={backImg} className="mb-8" onClick={() => navigate('/')} alt="back arrow" />
+                    <img src={backImg} className="mb-8" onClick={handleBack} alt="back arrow" />
                 </div>
                 <h2 className="text-center main-h mb-32">Insurance</h2>
             </div>
@@ -25,6 +34,7 @@ const Insurance = () => {
 
                 </div>
                 <button
+                   onClick={handleNext}
                     className='btn btn-primary btn-w-fit form-btn mt-4 w-100'
                 >
                     Next

@@ -226,10 +226,26 @@ select.form-select {
   color: var(--border);
 }
 
-/* .btn-with-border.btn-active {
+.btn-with-border.btn-active {
   background-color: var(--theme-clr);
   color: var(--text-white);
-} */
+}
+
+.test-container .gray-shaded-btn{
+  margin: 5px;
+}
+.gray-shaded-btn {
+  border: 1px solid var(--border-main);
+  color: var(--theme-fonts);
+}
+.gray-shaded-btn:hover{
+  background-color: var(--light-grey-btn);
+  border-color: var(--border);
+  color: var(--border);
+}
+.opacity-low {
+  opacity: 0.5;
+}
 
 
 /* Checkbox classes */
