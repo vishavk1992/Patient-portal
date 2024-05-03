@@ -2,7 +2,7 @@
 // import CreateProfile from '../../forms/createProfile';
 
 
-import AnxietyTest from "../../forms/mhe/anxiety-test"
+import EatingDisorderTest from "../../forms/mhe/Eating-disorder-test"
 
 
 
@@ -27,7 +27,7 @@ const OnBoardingForm = () => {
 
           }
         })()} */}
-        <AnxietyTest/>
+        <EatingDisorderTest/>
       </div>
 
     </div>

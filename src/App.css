@@ -246,6 +246,23 @@ select.form-select {
 .opacity-low {
   opacity: 0.5;
 }
+:focus-visible {
+  outline: 0;
+}
+.form-control:focus,
+textarea.custom-textarea:focus {
+  border-color: var(--input-border);
+  border-width: 1px;
+  outline: 1px solid var(--input-border);
+}
+.custom-textarea{
+  border: 1px solid var(--border-main);
+  resize: none;
+  height: 185px;
+  padding: 16px 20px;
+  width: var(--width-full);
+  border-radius: var(--rounded-8);
+}
 
 
 /* Checkbox classes */
@@ -347,6 +364,10 @@ select.form-select {
   .card-main.w-780,
   .w-780 {
     width: 100% !important;
+  }
+  .main-wrapper .card-main.mobile-card-h,
+  .main-wrapper .card-main.cheif-complaint-card {
+    height: 100%;
   }
 
 }
