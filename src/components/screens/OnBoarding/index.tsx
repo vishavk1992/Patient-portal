@@ -1,8 +1,9 @@
 // import { useAppSelector } from '../../../store/hooks';
 // import CreateProfile from '../../forms/createProfile';
 
+import MoodIssuesTest from "../../forms/mhe/mood-issues-test"
 
-import EatingDisorderTest from "../../forms/mhe/Eating-disorder-test"
+
 
 
 
@@ -27,7 +28,7 @@ const OnBoardingForm = () => {
 
           }
         })()} */}
-        <EatingDisorderTest/>
+        <MoodIssuesTest/>
       </div>
 
     </div>
