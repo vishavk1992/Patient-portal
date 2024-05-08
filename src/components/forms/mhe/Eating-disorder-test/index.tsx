@@ -2,8 +2,21 @@ import React from 'react'
 import Back from '/static/img/back-img.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
 import { Helmet } from 'react-helmet';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const EatingDisorderTest = () => {
+
+  const dispatch = useAppDispatch();
+
+  const handleBack = () => {
+    dispatch(setSubformStage({ Mhe: 11 }));
+  };
+
+  const handleNext = () => {
+    dispatch(setSubformStage({ Mhe: 13 }));
+  };
+
   return (
     <React.Fragment>
       <Helmet>
@@ -12,7 +25,7 @@ const EatingDisorderTest = () => {
       <div className='title-container'>
         <div className='px-mob-20'>
           <div className='text-center cursor-pointer pt-56'>
-            <img src={Back} className='mb-8'  />
+            <img src={Back} className='mb-8' onClick={handleBack}  />
           </div>
           <h2 className='main-h text-center mb-32'>
             Eating Disorders Test <img src={CircleQuestion} />
@@ -83,6 +96,7 @@ const EatingDisorderTest = () => {
         <div className='text-center'>
           <button
             className='btn btn-primary form-btn btn-w-fit btn-with-border mt-4 opacity-low w-100'
+            onClick={handleNext}
           >
             Next
           </button>

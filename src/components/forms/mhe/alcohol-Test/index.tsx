@@ -2,8 +2,20 @@ import React from 'react'
 import { Helmet } from 'react-helmet';
 import Back from '/static/img/back-img.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const AlcoholTest = () => {
+    const dispatch = useAppDispatch();
+
+    const handleBack =()=>{
+        dispatch(setSubformStage({Mhe : 8}))
+     }
+ 
+     const handleNext = () => {
+         dispatch(setSubformStage({ Mhe: 10 }));
+       };
+
     return (
         <React.Fragment>
             <Helmet>
@@ -12,7 +24,7 @@ const AlcoholTest = () => {
             <div className='title-container mx-auto w-780'>
                 <div className='px-mob-20'>
                     <div className='text-center cursor-pointer pt-56'>
-                        <img src={Back} className='mb-8' />
+                        <img src={Back} className='mb-8' onClick={handleBack} />
                     </div>
                     <h2 className='main-h text-center mb-32 '>
                         ADHD Test <img src={CircleQuestion} />
@@ -287,6 +299,7 @@ const AlcoholTest = () => {
                 <div className='text-center'>
                     <button
                         className='btn btn-primary form-btn  btn-with-border mt-4 opacity-low btn-w-507'
+                        onClick={handleNext}
                     >
                         Next
                     </button>

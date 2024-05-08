@@ -3,7 +3,7 @@ import Back from '/static/img/back-img.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
 import { Helmet } from 'react-helmet';
 import { useAppDispatch } from '../../../../store/hooks';
-import { setSubformStage } from '../../../../store/reducers/formReducer';
+import {setFormStage, setSubformStage } from '../../../../store/reducers/formReducer';
 
 const EmergencyContact = () => {
 
@@ -13,7 +13,8 @@ const EmergencyContact = () => {
         dispatch(setSubformStage({createProfile : 4}))
     }
     const handleNext=()=>{
-        dispatch(setSubformStage({createProfile : 6}))
+        dispatch(setFormStage(2));
+        dispatch(setSubformStage({ Mhe: 1 }));
     }
 
 

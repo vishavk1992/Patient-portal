@@ -2,10 +2,21 @@ import React, { useState } from 'react'
 import { Helmet } from 'react-helmet';
 import Back from '/static/img/back-img.svg';
 import CircleQuestion from '/static/img/circle-question.svg';
+import { useAppDispatch } from '../../../../store/hooks';
+import { setSubformStage } from '../../../../store/reducers/formReducer';
 
 const SucideTest = () => {
-
+    const dispatch = useAppDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+   
+
+  const handleBack = () => {
+    dispatch(setSubformStage({ Mhe: 3 }));
+  };
+
+  const handleNextButton = () => {
+    dispatch(setSubformStage({ Mhe: 5 }));
+  };
 
 
     return (
@@ -16,7 +27,7 @@ const SucideTest = () => {
             <div className='title-container'>
                 <div className='text-center cursor-pointer pt-56'>
                     <img src={Back} className='mb-8' onClick={() => {
-                        currentPage > 1 ? setCurrentPage(currentPage - 1) : ""
+                        currentPage > 1 ? setCurrentPage(currentPage - 1) : handleBack()
                     }} />
 
                 </div>
@@ -57,6 +68,7 @@ const SucideTest = () => {
 
                 <button
                     className='btn btn-primary form-btn btn-w-fit btn-with-border w-100 mt-4'
+                    onClick={handleNextButton}
                 >
                     Next
                 </button>
