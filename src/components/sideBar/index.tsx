@@ -1,14 +1,61 @@
 import Logo from '/static/img/main-logo.svg';
 import Progressbar from '../ProgressBar';
 import MobileMenuImg from '/static/img/menu-btn.svg';
-import { useState } from 'react';
+import Play from '/static/img/play.svg';
+import Check from '/static/img/check.svg';
+import { useEffect, useState } from 'react';
 import crossIcon from '/static/img/cross-icon.svg';
 import { Link } from 'react-router-dom';
 import { mainFormsData } from '../../data/formData';
+import { useAppDispatch } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
+import { setFormStage } from '../../store/reducers/formReducer';
+import { setSubformStage } from '../../store/reducers/formReducer';
+
+
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
+  const { formStage, subFormStage } = useAppSelector((state) => state.form);
 
-  const [progress] = useState(22);
+  const [progress, setProgress] = useState(22);
+  const [estimatedTime, setEstimatedTime] = useState(22);
+  const [menu, subMenuClass] = useState('');
+
+
+  useEffect(() => {
+    if (formStage === 1) {
+      setProgress(22);
+      setEstimatedTime(22);
+    } else if (formStage === 2) {
+      setProgress(30);
+      setEstimatedTime(14);
+    } else if (formStage === 3) {
+      setProgress(80);
+      setEstimatedTime(4);
+    } else {
+      setProgress(100);
+    }
+  }, [formStage]);
+
+  const handleFormStage = (storeName: string, subFormPosition: number) => {
+    if (window.innerWidth <= 1024) {
+      const closeOffcanvasBtn: any = document.getElementById('closeoffcanvas');
+      closeOffcanvasBtn.click();
+    }
+    dispatch(setSubformStage({ [storeName]: subFormPosition }));
+  };
+
+
+  // const handleForms = ((formPosition: number, subFormStage: any) => {
+  //   if (formStage >= formPosition) {
+  //     dispatch(setSubformStage(formPosition));
+  //     if (formPosition !== formStage) {
+  //       dispatch(setSubformStage({ [subFormStage.subForm]: subFormStage.subFormLength }))
+  //     }
+  //   }
+  // })
+
 
   return (
     <div>
@@ -21,6 +68,7 @@ const Sidebar = () => {
               <Progressbar
                 bgColor={progress > 30 ? '#00D870' : '#7f54ee'}
                 completed={progress}
+                estimatedTime={estimatedTime}
 
               />
             </div>
@@ -49,6 +97,7 @@ const Sidebar = () => {
                   <Progressbar
                     bgColor={progress > 30 ? '#00D870' : '#7f54ee'}
                     completed={progress}
+                    estimatedTime={estimatedTime}
                   />
                 </div>
               </div>
@@ -83,26 +132,58 @@ const Sidebar = () => {
                     />
                   </div>
                 </div>
-                <p>~ min. est. to complete</p>
+                <p className={`${progress === 100 ? 'progress-success' : 'light-theme-text'} mb-48`}>
+                  {progress === 100 ? 'DONE!' : `~${estimatedTime} min. est. to complete `}
+                </p>
               </div>
 
               <ul>
                 {mainFormsData.map((form) => {
                   return (
-                    <p key={form.id}>
-                      <div>
-                        <p>
+                    <p
+                      className={`${form.formPosition !== formStage ? 'mb-48' : 'mb-0'}`}
+                      key={form.id}>
+                      <div className='d-flex align-items-center'>
+                        {formStage >= form.formPosition && <img className='pe-2' src={Check} />}
+                        <p
+                          className={`text-uppercase mb-0 cursor-pointer title-letter-space ${formStage === form.formPosition
+                            ? 'light-theme-text'
+                            : formStage < form.formPosition
+                              ? 'light-text'
+                              : ''
+                            }`}
+
+                          // onClick={() => {
+                          //   if (form.formPosition < 4) {
+                          //     handleForms(form.formPosition, {
+                          //       subForm: form.storeName,
+                          //       subFormLength: form.subForms?.length,
+                          //     })
+                          //   }
+                          // }}
+                        >
                           {form.title}
                         </p>
                       </div>
-
-                      <ul>
-                        {form.subForms?.map((subForm) => {
-                          return (
-                            <li>{subForm.title}</li>
-                          )
-                        })}
-                      </ul>
+                      {formStage === form.formPosition && (
+                        <ul>
+                          {form.subForms?.map((subForm) => {
+                            return (
+                              <li key={subForm.id}
+                              className='cursor-pointer'
+                              onClick={() =>
+                                handleFormStage(form.storeName, subForm.subFormPosition)
+                              }
+                              >
+                                {subFormStage[form.storeName] === subForm.subFormPosition && (
+                                <img className='pe-2' src={Play} />
+                              )}
+                                {subForm.title}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      )}
                     </p>
 
                   )
