@@ -1,3 +1,18 @@
+export const uppercaseFirstCharacter = (text: string) => {
+  const words = text.split(' ');
+  const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+  const capitalizedText = capitalizedWords.join(' ');
+  return capitalizedText;
+};
+
+export const scrollToTopDiv = (element: any) => {
+  if (element.scrollingElement) {
+    element.scrollingElement.scrollTop
+  } else {
+    element.scrollTo({ top: 0, left: 0 })
+  }
+};
+
 export const getContentWrapperClass = (formStage: number, subFormStage: number) => {
     let className = '';
     if (

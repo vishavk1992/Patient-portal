@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { useAppSelector } from '../../store/hooks';
 import { setFormStage } from '../../store/reducers/formReducer';
 import { setSubformStage } from '../../store/reducers/formReducer';
+import { uppercaseFirstCharacter } from '../../utilities';
 
 
 
@@ -20,7 +21,24 @@ const Sidebar = () => {
 
   const [progress, setProgress] = useState(22);
   const [estimatedTime, setEstimatedTime] = useState(22);
-  const [menu, subMenuClass] = useState('');
+  const [menuClass, setMenuClass] = useState('');
+
+  const handleMenuClass = (scrollTop: any) => {
+    if (menuClass !== 'shadow-visible' && scrollTop >= 62) {
+      setMenuClass('shadow-visible');
+    } else if (menuClass === 'shadow-visible' && scrollTop < 62) {
+      setMenuClass('');
+    }
+  };
+
+  useEffect(() => {
+    const contentWrapper = document.getElementById('content-wrapper');
+    if (contentWrapper) {
+      contentWrapper.addEventListener('scroll', () => {
+        handleMenuClass(contentWrapper.scrollTop);
+      });
+    }
+  }, [formStage, subFormStage, menuClass]);
 
 
   useEffect(() => {
@@ -28,12 +46,14 @@ const Sidebar = () => {
       setProgress(22);
       setEstimatedTime(22);
     } else if (formStage === 2) {
-      setProgress(30);
-      setEstimatedTime(14);
-    } else if (formStage === 3) {
       setProgress(80);
       setEstimatedTime(4);
-    } else {
+    }
+    //  else if (formStage === 3) {
+    //   setProgress(100);
+    //   setEstimatedTime(4);
+    // } 
+    else {
       setProgress(100);
     }
   }, [formStage]);
@@ -47,19 +67,19 @@ const Sidebar = () => {
   };
 
 
-  // const handleForms = ((formPosition: number, subFormStage: any) => {
-  //   if (formStage >= formPosition) {
-  //     dispatch(setSubformStage(formPosition));
-  //     if (formPosition !== formStage) {
-  //       dispatch(setSubformStage({ [subFormStage.subForm]: subFormStage.subFormLength }))
-  //     }
-  //   }
-  // })
+  const handleForms = ((formPosition: number, subFormStage: any) => {
+    if (formStage >= formPosition) {
+      dispatch(setFormStage(formPosition));
+      if (formPosition !== formStage) {
+        dispatch(setSubformStage({ [subFormStage.subForm]: subFormStage.subFormLength }))
+      }
+    }
+  })
 
 
   return (
     <div>
-      <div className='tab-view-header bg-white height-100 d-none p-3'>
+      <div className={`tab-view-header bg-white height-100 d-none p-3 ${menuClass}`}>
 
         <div className='d-flex justify-content-between w-100'>
           <div className='d-flex align-items-center w-100'>
@@ -153,14 +173,14 @@ const Sidebar = () => {
                               : ''
                             }`}
 
-                          // onClick={() => {
-                          //   if (form.formPosition < 4) {
-                          //     handleForms(form.formPosition, {
-                          //       subForm: form.storeName,
-                          //       subFormLength: form.subForms?.length,
-                          //     })
-                          //   }
-                          // }}
+                          onClick={() => {
+                            if (form.formPosition < 4) {
+                              handleForms(form.formPosition, {
+                                subForm: form.storeName,
+                                subFormLength: form.subForms?.length,
+                              })
+                            }
+                          }}
                         >
                           {form.title}
                         </p>
@@ -178,7 +198,8 @@ const Sidebar = () => {
                                 {subFormStage[form.storeName] === subForm.subFormPosition && (
                                 <img className='pe-2' src={Play} />
                               )}
-                                {subForm.title}
+                          
+                                <span>{uppercaseFirstCharacter(subForm.title)}</span>
                               </li>
                             )
                           })}

@@ -104,7 +104,7 @@ const EmergencyContact = () => {
                     </div>
                     <button
                     onClick={handleNext}
-                        className='btn btn-primary form-btn btn-w-fit w-100'
+                        className='btn btn-primary btn-w-fit form-btn mt-4 w-100'
                     >
                         Next
                     </button>

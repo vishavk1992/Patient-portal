@@ -79,7 +79,7 @@ const PersonalData = () => {
           </div>
           <button
            onClick={handleNext}
-            className='btn btn-primary form-btn btn-w-fit btn-with-border w-100'
+            className='btn btn-primary form-btn btn-w-fit w-100'
           >
             Next
           </button>
