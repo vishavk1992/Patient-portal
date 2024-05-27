@@ -18,8 +18,10 @@ Currently, two official plugins are available:
 https://online-patient-portal.netlify.app/
 
 ## Screenshot of project : 
-![Screenshot 2024-05-27 154135](https://github.com/vishavk1992/Patient-portal/assets/148455293/b55722ca-bb9d-432c-a659-73b34c173314)
+
 ![Screenshot 2024-05-27 154044](https://github.com/vishavk1992/Patient-portal/assets/148455293/e265cff8-8828-4e20-a3d2-d9ffe5fbc80e)
+![Screenshot 2024-05-27 154135](https://github.com/vishavk1992/Patient-portal/assets/148455293/b55722ca-bb9d-432c-a659-73b34c173314)
+
 
 
 
